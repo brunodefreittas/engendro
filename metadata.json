@@ -1,0 +1,6 @@
+{
+  "name": "Engendro Eletrônicos",
+  "description": "Importação e revenda de componentes eletrônicos de alta performance. Soluções em clock e frequência para a indústria nacional.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
