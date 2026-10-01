@@ -1,7 +1,7 @@
 import React from 'react';
 import { Language } from '../types';
-import { translations, companyData } from '../data';
-import { FileText, X, MessageSquare, Download, CheckCircle2 } from 'lucide-react';
+import { companyData } from '../data';
+import { FileText, X, MessageSquare, CheckCircle2 } from 'lucide-react';
 
 interface CatalogModalProps {
   isOpen: boolean;
@@ -13,7 +13,12 @@ export const CatalogModal: React.FC<CatalogModalProps> = ({ isOpen, onClose, lan
   if (!isOpen) return null;
 
   const handleWhatsApp = () => {
-    window.open(`https://wa.me/${companyData.whatsappRaw}`, '_blank');
+    const message = encodeURIComponent(
+      lang === 'pt'
+        ? 'Olá! Gostaria de solicitar o catálogo completo em PDF da Engendro Eletrônicos.'
+        : 'Hello! I would like to request the complete PDF catalog from Engendro Eletrônicos.'
+    );
+    window.open(`https://wa.me/${companyData.whatsappRaw}?text=${message}`, '_blank');
   };
 
   return (
@@ -37,16 +42,16 @@ export const CatalogModal: React.FC<CatalogModalProps> = ({ isOpen, onClose, lan
 
         <p className="text-slate-600 text-sm leading-relaxed mb-6">
           {lang === 'pt'
-            ? 'O arquivo PDF oficial do catálogo completo está sendo integrado pela nossa equipe e o link definitivo será disponibilizado em breve.'
-            : 'The official PDF catalog file is being integrated by our team and the final link will be available soon.'}
+            ? 'Solicite nosso catálogo técnico completo diretamente com nossa equipe via WhatsApp. Enviaremos o arquivo e todas as especificações imediatamente.'
+            : 'Request our complete technical catalog directly with our team via WhatsApp. We will send the file and all specifications immediately.'}
         </p>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 mb-6 flex items-center gap-3">
-          <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0" />
-          <span className="text-xs text-blue-900 font-medium">
+        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 mb-6 flex items-center gap-3">
+          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+          <span className="text-xs text-emerald-900 font-medium">
             {lang === 'pt'
-              ? 'Para cotações urgentes, solicite agora mesmo pelo WhatsApp.'
-              : 'For urgent quotations, request directly via WhatsApp.'}
+              ? 'Atendimento rápido e envio imediato do catálogo.'
+              : 'Fast service and immediate catalog delivery.'}
           </span>
         </div>
 

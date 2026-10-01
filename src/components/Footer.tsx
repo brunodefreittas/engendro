@@ -90,7 +90,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} {companyData.legalName}. {t.rights}</p>
+          <p>© 2022 Engendro Eletrônicos Ltda. Todos os direitos reservados.</p>
           <p>{t.tagline}</p>
         </div>
       </div>

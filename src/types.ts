@@ -7,6 +7,9 @@ export interface ProductItem {
   category: string;
   descriptionPt: string;
   descriptionEn: string;
+  frequencyRange: string;
+  packageType: string;
+  stability: string;
   specs?: string[];
   image: string;
   video: string;

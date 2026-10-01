@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Language } from '../types';
 import { translations, companyData } from '../data';
 import { MessageSquare, FileText, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface NavbarProps {
   lang: Language;
@@ -18,30 +19,43 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog }) 
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-xs">
+    <motion.header 
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs font-sans"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3">
+        <motion.a 
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          href="#" 
+          className="flex items-center gap-3"
+        >
           <img
             src={`${companyData.baseUrl}logo-azul.svg`}
             alt="Engendro Eletrônicos"
-            className="h-10 w-auto object-contain"
+            className="h-14 sm:h-16 w-auto object-contain"
             onError={(e) => {
               (e.currentTarget as HTMLElement).style.display = 'none';
             }}
           />
-        </a>
+        </motion.a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          <a href="#about" className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors">
-            {t.about}
+          <a href="#about" className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1">
+            <span>{t.about}</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
           </a>
-          <a href="#products" className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors">
-            {t.products}
+          <a href="#products" className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1">
+            <span>{t.products}</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
           </a>
-          <a href="#contact" className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors">
-            {t.contact}
+          <a href="#contact" className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1">
+            <span>{t.contact}</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
           </a>
         </nav>
 
@@ -51,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog }) 
             <button
               onClick={() => setLang('pt')}
               className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${
-                lang === 'pt' ? 'bg-blue-900 text-white shadow-xs' : 'text-slate-700'
+                lang === 'pt' ? 'bg-blue-900 text-white shadow-xs' : 'text-slate-700 hover:text-blue-900'
               }`}
             >
               PT
@@ -59,28 +73,32 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog }) 
             <button
               onClick={() => setLang('en')}
               className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${
-                lang === 'en' ? 'bg-blue-900 text-white shadow-xs' : 'text-slate-700'
+                lang === 'en' ? 'bg-blue-900 text-white shadow-xs' : 'text-slate-700 hover:text-blue-900'
               }`}
             >
               EN
             </button>
           </div>
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
             onClick={onOpenCatalog}
             className="flex items-center gap-2 px-4 py-2 text-xs font-semibold text-blue-900 bg-blue-50 hover:bg-blue-100 rounded-xl border border-blue-200 transition-colors"
           >
             <FileText className="w-4 h-4 text-blue-700" />
             <span>{t.catalog}</span>
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
             onClick={handleWhatsApp}
             className="flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-emerald-700 hover:bg-emerald-800 rounded-xl shadow-sm transition-all"
           >
             <MessageSquare className="w-4 h-4" />
             <span>WhatsApp</span>
-          </button>
+          </motion.button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -113,53 +131,61 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog }) 
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3 shadow-lg">
-          <a
-            href="#about"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3 shadow-lg overflow-hidden"
           >
-            {t.about}
-          </a>
-          <a
-            href="#products"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
-          >
-            {t.products}
-          </a>
-          <a
-            href="#contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
-          >
-            {t.contact}
-          </a>
-          <div className="pt-2 flex flex-col gap-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenCatalog();
-              }}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-blue-50 text-blue-900 font-semibold rounded-xl text-xs"
+            <a
+              href="#about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
             >
-              <FileText className="w-4 h-4 text-blue-700" />
-              <span>{t.catalog}</span>
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                handleWhatsApp();
-              }}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-700 text-white font-semibold rounded-xl text-xs"
+              {t.about}
+            </a>
+            <a
+              href="#products"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
             >
-              <MessageSquare className="w-4 h-4" />
-              <span>WhatsApp</span>
-            </button>
-          </div>
-        </div>
-      )}
-    </header>
+              {t.products}
+            </a>
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
+            >
+              {t.contact}
+            </a>
+            <div className="pt-2 flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenCatalog();
+                }}
+                className="w-full flex items-center justify-center gap-2 py-3 bg-blue-50 text-blue-900 font-semibold rounded-xl text-xs"
+              >
+                <FileText className="w-4 h-4 text-blue-700" />
+                <span>{t.catalog}</span>
+              </button>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleWhatsApp();
+                }}
+                className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-700 text-white font-semibold rounded-xl text-xs"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>WhatsApp</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };

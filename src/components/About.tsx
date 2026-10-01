@@ -3,6 +3,7 @@ import { Language } from '../types';
 import { translations } from '../data';
 import { Award, TrendingUp, Zap, ShieldCheck } from 'lucide-react';
 import { motion } from 'motion/react';
+import warehouseImg from '../assets/images/warehouse_logistics_components_1790877916392.jpg';
 
 interface AboutProps {
   lang: Language;
@@ -34,8 +35,8 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
             <div className="lg:col-span-5">
               <div className="rounded-2xl overflow-hidden shadow-xl border border-slate-200 relative aspect-video sm:aspect-square bg-slate-900 group">
                 <img
-                  src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1200"
-                  alt="Engenheiro e Escritório de Importação e Suprimento de Componentes Eletrônicos"
+                  src={warehouseImg}
+                  alt="Centro de distribuição e logística de componentes eletrônicos"
                   className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-950/40 via-transparent to-transparent pointer-events-none" />
