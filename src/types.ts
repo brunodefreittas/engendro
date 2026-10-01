@@ -23,3 +23,18 @@ export interface ProductCategory {
   descriptionEn: string;
   items: ProductItem[];
 }
+
+export interface BlogPost {
+  id: string;
+  titlePt: string;
+  titleEn: string;
+  excerptPt: string;
+  excerptEn: string;
+  contentPt: string;
+  contentEn: string;
+  date: string;
+  readTime: string;
+  category: string;
+  image: string;
+  author: string;
+}

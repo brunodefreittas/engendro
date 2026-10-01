@@ -1,4 +1,4 @@
-import { ProductCategory } from './types';
+import { ProductCategory, BlogPost } from './types';
 
 export const companyData = {
   name: 'Engendro Eletrônicos',
@@ -18,6 +18,7 @@ export const translations = {
       about: 'Quem Somos',
       pillars: 'Pilares',
       products: 'Produtos',
+      blog: 'Blog',
       contact: 'Contato',
       catalog: 'Catálogo em PDF',
       whatsapp: 'WhatsApp',
@@ -54,13 +55,21 @@ export const translations = {
       },
       requestQuote: 'Solicitar Cotação',
     },
+    blog: {
+      title: 'Blog & Artigos Técnicos',
+      subtitle: 'Insights de engenharia, seleção de clocks, cristais e inteligência logística para a indústria eletrônica.',
+      readMore: 'Ler Artigo Completo',
+      back: '← Voltar para a Lista de Artigos',
+      publishedBy: 'Por',
+      minRead: 'de leitura',
+    },
     contact: {
       title: 'Fale Conosco',
       subtitle: 'Entre em contato com nossa equipe para cotações, suprimentos e suporte técnico especializado.',
       whatsappLabel: 'WhatsApp Direto',
       emailLabel: 'E-mail Comercial',
       addressLabel: 'Localização',
-      addressValue: 'Paraná, Brasil',
+      addressValue: 'Pato Branco, Paraná',
       formTitle: 'Envie sua Mensagem',
       namePlaceholder: 'Seu Nome / Empresa',
       emailPlaceholder: 'Seu E-mail',
@@ -78,6 +87,7 @@ export const translations = {
       about: 'About Us',
       pillars: 'Pillars',
       products: 'Products',
+      blog: 'Blog',
       contact: 'Contact',
       catalog: 'PDF Catalog',
       whatsapp: 'WhatsApp',
@@ -114,13 +124,21 @@ export const translations = {
       },
       requestQuote: 'Request Quote',
     },
+    blog: {
+      title: 'Blog & Technical Articles',
+      subtitle: 'Engineering insights, clock selection, crystals, and supply chain logistics intelligence for the electronics industry.',
+      readMore: 'Read Full Article',
+      back: '← Back to Articles',
+      publishedBy: 'By',
+      minRead: 'read',
+    },
     contact: {
       title: 'Get in Touch',
       subtitle: 'Contact our team for quotations, supplies, and specialized technical support.',
       whatsappLabel: 'Direct WhatsApp',
       emailLabel: 'Commercial Email',
       addressLabel: 'Location',
-      addressValue: 'Paraná, Brazil',
+      addressValue: 'Pato Branco, Paraná',
       formTitle: 'Send a Message',
       namePlaceholder: 'Your Name / Company',
       emailPlaceholder: 'Your Email',
@@ -318,5 +336,116 @@ export const productCategories: ProductCategory[] = [
         video: ''
       }
     ]
+  }
+];
+
+export const blogPosts: BlogPost[] = [
+  {
+    id: 'importancia-dos-cristais-de-quartzo',
+    titlePt: 'A Importância Crítica dos Cristais de Quartzo em Sistemas Embarcados',
+    titleEn: 'The Critical Importance of Quartz Crystals in Embedded Systems',
+    excerptPt: 'Entenda como o efeito piezoelétrico do quartzo garante a precisão de clock exigida por microcontroladores modernos e redes IoT.',
+    excerptEn: 'Understand how the piezoelectric effect of quartz ensures the clock precision demanded by modern microcontrollers and IoT networks.',
+    contentPt: `
+      <p>Em qualquer sistema eletrônico digital moderno, a temporização (timing) é o equivalente ao sistema circulatório humano. Sem um sinal de clock perfeitamente estável e sincronizado, microcontroladores, processadores de sinal digital (DSP) e transceptores de radiofrequência falham em manter a integridade dos dados.</p>
+      
+      <h3>O Papel do Efeito Piezoelétrico</h3>
+      <p>Os cristais de quartzo aproveitam o efeito piezoelétrico direto e inverso. Quando uma tensão elétrica é aplicada ao corte AT do cristal de quartzo, ele oscila mecanicamente em uma frequência fundamental extremamente precisa e estável frente a variações térmicas e de envelhecimento.</p>
+
+      <h3>Critérios de Seleção para Engenheiros de Projeto</h3>
+      <ul>
+        <li><strong>Frequência Fundamental vs. Overtone:</strong> Escolher o corte correto evita problemas de espúrios e oscilações indesejadas.</li>
+        <li><strong>Capacitância de Carga (CL):</strong> Combinar o cristal com os capacitores externos corretos garante que a frequência nominal seja atingida sem desvios em ppm.</li>
+        <li><strong>ESR (Resistência Série Equivalente):</strong> Cristais com menor ESR facilitam o arranque do oscilador interno do MCU, economizando energia em aplicações alimentadas por bateria.</li>
+      </ul>
+
+      <p>A Engendro Eletrônicos mantém um portfólio completo de cristais de quartzo e ressonadores certificados, garantindo suprimento contínuo e rigor técnico para a indústria nacional.</p>
+    `,
+    contentEn: `
+      <p>In any modern digital electronic system, timing is the equivalent of the human circulatory system. Without a perfectly stable and synchronized clock signal, microcontrollers, digital signal processors (DSP), and radio frequency transceivers fail to maintain data integrity.</p>
+      
+      <h3>The Role of the Piezoelectric Effect</h3>
+      <p>Quartz crystals take advantage of direct and inverse piezoelectric effects. When an electrical voltage is applied to the AT-cut quartz crystal, it oscillates mechanically at an extremely precise fundamental frequency stable against thermal variations and aging.</p>
+
+      <h3>Selection Criteria for Design Engineers</h3>
+      <ul>
+        <li><strong>Fundamental Frequency vs. Overtone:</strong> Choosing the correct cut avoids spurious issues and unwanted oscillations.</li>
+        <li><strong>Load Capacitance (CL):</strong> Matching the crystal with correct external capacitors ensures the nominal frequency is reached without ppm drift.</li>
+        <li><strong>ESR (Equivalent Series Resistance):</strong> Crystals with lower ESR facilitate MCU internal oscillator startup, saving energy in battery-powered applications.</li>
+      </ul>
+
+      <p>Engendro Eletrônicos maintains a complete portfolio of certified quartz crystals and resonators, ensuring continuous supply and technical rigor for the national industry.</p>
+    `,
+    date: '15 de Março, 2026',
+    readTime: '4 min',
+    category: 'Engenharia de Clocks',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200',
+    author: 'Engenharia Engendro'
+  },
+  {
+    id: 'mitigando-gargalos-de-importacao',
+    titlePt: 'Como Mitigar Gargalos na Importação de Semicondutores no Brasil',
+    titleEn: 'How to Mitigate Bottlenecks in Semiconductor Importation in Brazil',
+    excerptPt: 'Estratégias logísticas e homologações para assegurar que sua linha de produção nunca paralise por falta de componentes críticos.',
+    excerptEn: 'Logistics strategies and approvals to ensure your production line never halts due to lack of critical components.',
+    contentPt: `
+      <p>O mercado global de semicondutores e componentes passivos é altamente dinâmico e sujeito a flutuações de lead time. Para indústrias brasileiras, a dependência de cadeias de suprimento externas exige planejamento estratégico rigoroso e parcerias locais sólidas.</p>
+
+      <h3>1. Previsão de Demanda e Estoque de Segurança</h3>
+      <p>Trabalhar com fornecedores que mantêm estoque dedicado ou programações de entrega (forecast trimming) reduz drasticamente o risco de parada de planta.</p>
+
+      <h3>2. Rastreabilidade e Conformidade Normativa</h3>
+      <p>Componentes falsificados ou fora de especificação representam um risco catastrófico para equipamentos industriais e médicos. A importação direta por canais autorizados assegura certificados de lote (CoC) e conformidade RoHS completa.</p>
+
+      <h3>3. A Ponte Estratégica Regional</h3>
+      <p>Com sede no Paraná e atuação em todo o território nacional, a Engendro Eletrônicos atua eliminando a burocracia aduaneira e garantindo entrega ágil direto no almoxarifado do cliente.</p>
+    `,
+    contentEn: `
+      <p>The global semiconductor and passive components market is highly dynamic and subject to lead time fluctuations. For Brazilian industries, dependence on external supply chains requires rigorous strategic planning and solid local partnerships.</p>
+
+      <h3>1. Demand Forecasting and Safety Stock</h3>
+      <p>Working with suppliers who maintain dedicated stock or delivery schedules drastically reduces plant shutdown risk.</p>
+
+      <h3>2. Traceability and Regulatory Compliance</h3>
+      <p>Counterfeit or out-of-spec components pose a catastrophic risk to industrial and medical equipment. Direct importation through authorized channels ensures lot certificates (CoC) and full RoHS compliance.</p>
+
+      <h3>3. The Regional Strategic Bridge</h3>
+      <p>Headquartered in Paraná and operating nationwide, Engendro Eletrônicos eliminates customs bureaucracy and ensures agile delivery straight to the client's warehouse.</p>
+    `,
+    date: '28 de Fevereiro, 2026',
+    readTime: '5 min',
+    category: 'Logística & Suprimentos',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200',
+    author: 'Logística & Supply'
+  },
+  {
+    id: 'osciladores-mems-vs-cristal',
+    titlePt: 'Osciladores MEMS vs. Cristais Tradicionais: Qual Escolher?',
+    titleEn: 'MEMS Oscillators vs. Traditional Crystals: Which One to Choose?',
+    excerptPt: 'Comparativo técnico aprofundado sobre imunidade a vibrações, consumo energético e estabilidad térmica.',
+    excerptEn: 'In-depth technical comparison on vibration immunity, power consumption, and thermal stability.',
+    contentPt: `
+      <p>A escolha entre um oscilador de cristal tradicional (XO/SPXO) e um oscilador baseado em tecnologia MEMS (Micro-Electro-Mechanical Systems) depende criticamente do ambiente operacional do produto final.</p>
+
+      <h3>Resistência a Choques e Vibrações</h3>
+      <p>Enquanto cristais de quartzo mecânicos podem sofrer microfissuras ou desvios sob forte vibração mecânica (como em motores, automotivo ou aeroespacial), os osciladores MEMS de silício demonstram imunidade excepcional a choques de até 50.000g.</p>
+
+      <h3>Estabilidade e Temperatura</h3>
+      <p>Para aplicações onde o menor consumo de corrente e a flexibilidade de frequência programável são cruciais, os dispositivos MEMS oferecem vantagens notáveis. No entanto, para jitter ultra-baixo em telecomunicações de alta frequência, os cristais OCXO e TCXO tradicionais continuam sendo o padrão ouro.</p>
+    `,
+    contentEn: `
+      <p>The choice between a traditional crystal oscillator (XO/SPXO) and a MEMS-based oscillator (Micro-Electro-Mechanical Systems) depends critically on the operating environment of the final product.</p>
+
+      <h3>Shock and Vibration Resistance</h3>
+      <p>While mechanical quartz crystals can suffer micro-cracks or frequency shifts under severe mechanical vibration (such as in motors, automotive, or aerospace), silicon MEMS oscillators demonstrate exceptional immunity to shocks up to 50,000g.</p>
+
+      <h3>Stability and Temperature</h3>
+      <p>For applications where lower current consumption and programmable frequency flexibility are crucial, MEMS devices offer remarkable advantages. However, for ultra-low jitter in high-frequency telecommunications, traditional OCXO and TCXO crystals remain the gold standard.</p>
+    `,
+    date: '10 de Fevereiro, 2026',
+    readTime: '6 min',
+    category: 'Tecnologia & Inovação',
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1200',
+    author: 'P&D Engenharia'
   }
 ];

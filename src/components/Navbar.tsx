@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { translations, companyData } from '../data';
-import { MessageSquare, FileText, Menu, X } from 'lucide-react';
+import { MessageSquare, FileText, Menu, X, BookOpen } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface NavbarProps {
   lang: Language;
   setLang: (lang: Language) => void;
   onOpenCatalog: () => void;
+  onNavigateHome: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog }) => {
+export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog, onNavigateHome }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = translations[lang].nav;
 
@@ -30,7 +31,11 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog }) 
         <motion.a 
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          href="#" 
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onNavigateHome();
+          }}
           className="flex items-center gap-3"
         >
           <img
@@ -45,15 +50,35 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog }) 
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          <a href="#about" className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1">
+          <a 
+            href="#about" 
+            onClick={onNavigateHome}
+            className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1"
+          >
             <span>{t.about}</span>
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
           </a>
-          <a href="#products" className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1">
+          <a 
+            href="#products" 
+            onClick={onNavigateHome}
+            className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1"
+          >
             <span>{t.products}</span>
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
           </a>
-          <a href="#contact" className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1">
+          <a 
+            href="#blog" 
+            className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1 flex items-center gap-1.5"
+          >
+            <BookOpen className="w-3.5 h-3.5 text-blue-700" />
+            <span>{t.blog}</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
+          </a>
+          <a 
+            href="#contact" 
+            onClick={onNavigateHome}
+            className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1"
+          >
             <span>{t.contact}</span>
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
           </a>
@@ -142,21 +167,40 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog }) 
           >
             <a
               href="#about"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onNavigateHome();
+              }}
               className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
             >
               {t.about}
             </a>
             <a
               href="#products"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onNavigateHome();
+              }}
               className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
             >
               {t.products}
             </a>
             <a
+              href="#blog"
+              onClick={() => {
+                setMobileMenuOpen(false);
+              }}
+              className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100 flex items-center gap-2"
+            >
+              <BookOpen className="w-4 h-4 text-blue-700" />
+              <span>{t.blog}</span>
+            </a>
+            <a
               href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onNavigateHome();
+              }}
               className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
             >
               {t.contact}
