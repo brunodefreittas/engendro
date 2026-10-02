@@ -8,10 +8,11 @@ interface NavbarProps {
   lang: Language;
   setLang: (lang: Language) => void;
   onOpenCatalog: () => void;
-  onNavigateHome: () => void;
+  onNavigate: (view: 'home' | 'blog') => void;
+  currentView: 'home' | 'blog' | 'article';
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog, onNavigateHome }) => {
+export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog, onNavigate, currentView }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = translations[lang].nav;
 
@@ -34,7 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog, on
           href="#"
           onClick={(e) => {
             e.preventDefault();
-            onNavigateHome();
+            onNavigate('home');
           }}
           className="flex items-center gap-3"
         >
@@ -52,31 +53,53 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog, on
         <nav className="hidden md:flex items-center gap-8">
           <a 
             href="#about" 
-            onClick={onNavigateHome}
-            className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate('home');
+              setTimeout(() => {
+                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
+            className={`text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1 ${
+              currentView === 'home' ? '' : ''
+            }`}
           >
             <span>{t.about}</span>
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
           </a>
           <a 
             href="#products" 
-            onClick={onNavigateHome}
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate('home');
+              setTimeout(() => {
+                document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
             className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1"
           >
             <span>{t.products}</span>
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
           </a>
-          <a 
-            href="#blog" 
-            className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1 flex items-center gap-1.5"
+          <button 
+            onClick={() => onNavigate('blog')}
+            className={`text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1 flex items-center gap-1.5 bg-transparent border-none cursor-pointer ${
+              currentView === 'blog' || currentView === 'article' ? 'text-blue-900 font-semibold' : ''
+            }`}
           >
             <BookOpen className="w-3.5 h-3.5 text-blue-700" />
             <span>{t.blog}</span>
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-900 transition-all duration-300 group-hover:w-full" />
-          </a>
+            <span className={`absolute bottom-0 left-0 h-0.5 bg-blue-900 transition-all duration-300 ${currentView === 'blog' || currentView === 'article' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+          </button>
           <a 
             href="#contact" 
-            onClick={onNavigateHome}
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate('home');
+              setTimeout(() => {
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
             className="text-slate-700 hover:text-blue-900 font-medium text-sm transition-colors relative group py-1"
           >
             <span>{t.contact}</span>
@@ -169,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog, on
               href="#about"
               onClick={() => {
                 setMobileMenuOpen(false);
-                onNavigateHome();
+                onNavigate('home');
               }}
               className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
             >
@@ -179,27 +202,27 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenCatalog, on
               href="#products"
               onClick={() => {
                 setMobileMenuOpen(false);
-                onNavigateHome();
+                onNavigate('home');
               }}
               className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
             >
               {t.products}
             </a>
-            <a
-              href="#blog"
+            <button
               onClick={() => {
                 setMobileMenuOpen(false);
+                onNavigate('blog');
               }}
-              className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100 flex items-center gap-2"
+              className="w-full text-left py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100 flex items-center gap-2 bg-transparent border-none"
             >
               <BookOpen className="w-4 h-4 text-blue-700" />
               <span>{t.blog}</span>
-            </a>
+            </button>
             <a
               href="#contact"
               onClick={() => {
                 setMobileMenuOpen(false);
-                onNavigateHome();
+                onNavigate('home');
               }}
               className="block py-2 text-slate-700 hover:text-blue-900 font-medium border-b border-slate-100"
             >

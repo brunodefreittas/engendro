@@ -1,13 +1,14 @@
 import React from 'react';
 import { Language } from '../types';
 import { translations, companyData } from '../data';
-import { Mail, MessageSquare } from 'lucide-react';
+import { Mail, MessageSquare, BookOpen } from 'lucide-react';
 
 interface FooterProps {
   lang: Language;
+  onNavigate: (view: 'home' | 'blog') => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ lang }) => {
+export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
   const t = translations[lang].footer;
   const slogan = lang === 'pt' ? companyData.sloganPt : companyData.sloganEn;
 
@@ -16,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
   };
 
   return (
-    <footer className="bg-slate-950 text-white py-16 border-t border-slate-800">
+    <footer className="bg-slate-950 text-white py-16 border-t border-slate-800 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Company Brand */}
@@ -43,19 +44,52 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
             </h4>
             <ul className="space-y-2.5 text-sm text-slate-400">
               <li>
-                <a href="#about" className="hover:text-white transition-colors">
+                <button
+                  onClick={() => {
+                    onNavigate('home');
+                    setTimeout(() => {
+                      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className="hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-slate-400"
+                >
                   {translations[lang].nav.about}
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#products" className="hover:text-white transition-colors">
+                <button
+                  onClick={() => {
+                    onNavigate('home');
+                    setTimeout(() => {
+                      document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className="hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-slate-400"
+                >
                   {translations[lang].nav.products}
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white transition-colors">
+                <button
+                  onClick={() => onNavigate('blog')}
+                  className="hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-slate-400 flex items-center gap-1.5"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-blue-400" />
+                  <span>{translations[lang].nav.blog}</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    onNavigate('home');
+                    setTimeout(() => {
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className="hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-slate-400"
+                >
                   {translations[lang].nav.contact}
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -69,7 +103,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
               <li>
                 <button
                   onClick={handleWhatsApp}
-                  className="flex items-center gap-2 hover:text-white transition-colors text-emerald-400 font-medium"
+                  className="flex items-center gap-2 hover:text-white transition-colors text-emerald-400 font-medium bg-transparent border-none p-0 cursor-pointer"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>{companyData.whatsapp}</span>

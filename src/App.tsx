@@ -13,40 +13,35 @@ import { Footer } from './components/Footer';
 export default function App() {
   const [lang, setLang] = useState<Language>('pt');
   const [catalogModalOpen, setCatalogModalOpen] = useState(false);
+  const [currentView, setCurrentView] = useState<'home' | 'blog' | 'article'>('home');
   const [selectedArticle, setSelectedArticle] = useState<BlogPost | null>(null);
 
-  const handleNavigateHome = () => {
+  const handleNavigate = (view: 'home' | 'blog') => {
+    setCurrentView(view);
     setSelectedArticle(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectArticle = (article: BlogPost) => {
     setSelectedArticle(article);
+    setCurrentView('article');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-600 selection:text-white font-sans">
+    <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-600 selection:text-white font-sans flex flex-col justify-between">
       {/* Navigation */}
       <Navbar
         lang={lang}
         setLang={setLang}
         onOpenCatalog={() => setCatalogModalOpen(true)}
-        onNavigateHome={handleNavigateHome}
+        onNavigate={handleNavigate}
+        currentView={currentView}
       />
 
-      {/* Main Content Sections or Full Article View */}
-      <main>
-        {selectedArticle ? (
-          <ArticleView
-            article={selectedArticle}
-            lang={lang}
-            onBack={() => {
-              setSelectedArticle(null);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-          />
-        ) : (
+      {/* Main Content View Switcher */}
+      <main className="flex-grow">
+        {currentView === 'home' && (
           <>
             <Hero
               lang={lang}
@@ -57,17 +52,35 @@ export default function App() {
               lang={lang}
               onOpenCatalog={() => setCatalogModalOpen(true)}
             />
-            <Blog
-              lang={lang}
-              onSelectArticle={handleSelectArticle}
-            />
             <Contact lang={lang} />
           </>
+        )}
+
+        {currentView === 'blog' && (
+          <Blog
+            lang={lang}
+            onSelectArticle={handleSelectArticle}
+          />
+        )}
+
+        {currentView === 'article' && selectedArticle && (
+          <ArticleView
+            article={selectedArticle}
+            lang={lang}
+            onBack={() => {
+              setCurrentView('blog');
+              setSelectedArticle(null);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
         )}
       </main>
 
       {/* Footer */}
-      <Footer lang={lang} />
+      <Footer 
+        lang={lang} 
+        onNavigate={handleNavigate}
+      />
 
       {/* Catalog Modal */}
       <CatalogModal
